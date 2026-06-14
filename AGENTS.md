@@ -8,9 +8,8 @@ Logseq plugin: sync all `.md` pages to a remote GitHub repo via command palette.
 
 ## Stack
 
-- Node.js, CommonJS (`"type": "commonjs"`)
-- `@logseq/libs` — plugin SDK
-- No build step; Logseq loads plugin directly from `index.js`
+- Node.js
+- No build step; Logseq loads plugin directly from `src/index.html`
 
 ## Module layout (`src/`)
 
@@ -34,9 +33,9 @@ Apply: DRY, SRP, SOLID, no magic numbers, small functions, no single-file blob.
 Uses `logseq.Git` API — NOT raw Octokit or shell git:
 
 - Set remote URL: `logseq.Git.exec('remote', 'set-url', 'origin', 'https://<PAT>@github.com/<owner>/<repo>.git')` (or `add` if first time)
-- Stage: `logseq.Git.exec('add', '.')`
-- Commit: `logseq.Git.exec('commit', '-m', 'sync: auto-sync <timestamp>')`
-- Push: `logseq.Git.exec('push', '-u', 'origin', 'master')` — branch hard-coded as `master`
+- Stage: `logseq.Git.execCommand('add', '.')`
+- Commit: `logseq.Git.execCommand('commit', '-m', 'sync: auto-sync <timestamp>')`
+- Push: `logseq.Git.execCommand('push', '-u', 'origin', 'master')` — branch hard-coded as `master`
 - List `.md` pages: `logseq.Editor.getPages()` / `logseq.App.getFiles()`
 
 ## Logseq plugin conventions
