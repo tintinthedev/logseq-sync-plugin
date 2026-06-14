@@ -10,9 +10,10 @@ logseq.ready(async () => {
         if (!settings.pat || !settings.repo) {
           showUI()
         } else {
-          logseq.UI.showMsg('Sync coming soon', 'info')
+          await syncPages(settings.pat, settings.repo)
         }
-      } catch {
+      } catch (err) {
+        console.error(err)
         logseq.UI.showMsg('Something went wrong. Check the plugin console.', 'error')
       }
     },
